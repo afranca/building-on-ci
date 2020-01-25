@@ -15,7 +15,9 @@
               name: Publish Docker Image to Docker Hub
               command: |
                 docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASS
+                docker tag afranca/building-on-ci $DOCKERHUB_USERNAME/building-on-ci:$CIRCLE_SHA1
                 docker tag afranca/building-on-ci $DOCKERHUB_USERNAME/building-on-ci:latest
+                docker push $DOCKERHUB_USERNAME/building-on-ci:$CIRCLE_SHA1
                 docker push $DOCKERHUB_USERNAME/building-on-ci:latest
     workflows:
       version: 2
